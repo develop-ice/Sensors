@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
 
@@ -48,6 +50,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         tempSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+
+        // Show case
+        new MaterialTapTargetPrompt.Builder(MainActivity.this)
+                .setTarget(R.id.btnGyro)
+                .setPrimaryText("This is the gyroscope sensor")
+                .setSecondaryText("Is ´Clock´ direction or ´Anti Clock´ direction")
+                .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                    @Override
+                    public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                        if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED) {
+                            // User has pressed the prompt target
+                            Toast.makeText(MainActivity.this, "Done!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .show();
     }
 
 

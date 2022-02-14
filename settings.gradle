@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':material-tap-target-prompt-3.3.2', ':material-tap-target-prompt-2.15.0'
